@@ -4,7 +4,7 @@
   <subtitle><![CDATA[stay foolish stay hungry]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-10-18T05:28:41.939Z</updated>
+  <updated>2014-10-31T08:58:42.468Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -13,6 +13,23 @@
   </author>
   
   <generator uri="http://zespia.tw/hexo/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[collection]]></title>
+    <link href="http://yoursite.com/2014/10/18/java/collection%20interface/collection/"/>
+    <id>http://yoursite.com/2014/10/18/java/collection interface/collection/</id>
+    <published>2014-10-18T04:54:22.000Z</published>
+    <updated>2014-10-31T08:54:20.000Z</updated>
+    <content type="html"><![CDATA[<p>collection</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>collection</p>
+]]>
+    </summary>
+    
+      <category term="collection" scheme="http://yoursite.com/categories/collection/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[编程]]></title>
