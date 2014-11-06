@@ -6,23 +6,17 @@
   <title>JDK1.7 HashMap实现 | 勿忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="HashMap简介
-
-HashMap
-基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺">
+基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JDK1.7 HashMap实现">
 <meta property="og:url" content="http://yoursite.com/2014/10/18/java/java集合/HashMap/">
 <meta property="og:site_name" content="勿忘初心">
 <meta property="og:description" content="HashMap简介
-
-HashMap
-基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺">
+基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JDK1.7 HashMap实现">
 <meta name="twitter:description" content="HashMap简介
-
-HashMap
-基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺">
+基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。">
 
   
     <link rel="alternative" href="/atom.xml" title="勿忘初心" type="application/atom+xml">
@@ -100,18 +94,46 @@ HashMap
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="HashMap简介">HashMap简介</h1>
-<hr>
-<h2 id="HashMap">HashMap</h2>
-<p>基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）<br>此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。<br>此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get 和 put）提供稳定的性能。迭代 collection 视图所需的时间与 HashMap 实例的“容量”（桶的数量）<br>及其大小（键-值映射关系数）成比例。所以，如果迭代性能很重要，则不要将初始容量设置得太高（或将加载因子设置得太低）。</p>
+        <hr>
+<h2 id="HashMap简介">HashMap简介</h2>
+<p>基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，<br>HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap<br>会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。 此实现假定哈希函数将元素适当地分布在各桶之间，可为<br>基本操作（get 和 put）提供稳定的性能。迭代 collection 视图所需的时间与 HashMap 实例的“容量”（桶的数量）及其大小（键-值映射<br>关系数）成比例。所以，如果迭代性能很重要，则不要将初始容量设置得太高（或将负载因子设置得太低）。</p>
 <h2 id="重要参数">重要参数</h2>
-<p>HashMap 的实例有两个参数影响其性能：初始容量 和负载因子。容量是哈希表中桶的数量，初始容量只是哈希表在创建时的容量。负载因子是哈希表在其容量自动增加之前<br>可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两<br>倍的桶数。</p>
+<p>HashMap 的实例有两个参数影响其性能：初始容量和负载因子。容量是哈希表中桶的数量，初始容量只是哈希表在创建时的容量。负载因<br>子是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表<br>进行rehash操作（即重建内部数据结构），从而哈希表将具有大约两倍的桶数。</p>
 <h2 id="同步机制">同步机制</h2>
-<p>注意，此实现不是同步的。如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须 保持外部同步。（结构上的修改是指添加或删除一<br>个或多个映射关系的任何操作；以防止对映射进行意外的非同步访问，如下所示：</p>
+<p>注意，此实现不是同步的。如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须 保持外部同步。<br>结构上的修改是指添加或删除一个或多个映射关系的任何操作；以防止对映射进行意外的非同步访问，如下所示：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map m = Collections.synchronizedMap(new HashMap(<span class="keyword">...</span>));</div></pre></td></tr></table></figure>
 
 <h2 id="迭代器">迭代器</h2>
-<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭代器本身的 remove方法，而不冒在<br>将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来说，存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，<br>正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
+<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭<br>代器本身的 remove方法，而不冒在将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来说，<br>存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
+<h2 id="HashMap变量的定义">HashMap变量的定义</h2>
+<pre><code><span class="comment">//默认容量大小16 必须为2的整数次方</span>
+<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span>
+<span class="comment">//最大容量2的30次方</span>
+<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAXIMUM_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">30</span>;
+<span class="comment">//默认的负载因子0.75</span>
+<span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="number">0.75</span>f;
+<span class="comment">//空表</span>
+<span class="keyword">static</span> <span class="keyword">final</span> Entry&lt;?,?&gt;[] EMPTY_TABLE = {};
+<span class="comment">//用来保存map实际数据 初始化为空数组</span>
+<span class="keyword">transient</span> Entry&lt;K,V&gt;[] table = (Entry&lt;K,V&gt;[]) EMPTY_TABLE;
+<span class="comment">//实际存储数据的大小</span>
+<span class="keyword">transient</span> <span class="keyword">int</span> <span class="keyword">size</span>;
+<span class="comment">//负载容量，当数据超多这个容量时会触发rehash操作</span>
+<span class="keyword">int</span> threshold;
+<span class="comment">//负载因子</span>
+<span class="keyword">final</span> <span class="keyword">float</span> loadFactor;
+<span class="comment">//HashMap修改的次数 容器的fail-fast机制也是基于这个变量</span>
+<span class="keyword">transient</span> <span class="keyword">int</span> modCount;
+</code></pre><h2 id="构造函数">构造函数</h2>
+<p>HashMap提供了四种构造方法，主要的有两个：<br>1.指定初始化容量和负载因子，不填默认为16和0.75,此时table依然会空数组,当调用put时判断如果table尚未<br>分配则调用inflateTable</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span>(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor) {</div><div class="line">       <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</div><div class="line">                                              initialCapacity);</div><div class="line">       <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">           initialCapacity = MAXIMUM_CAPACITY;</div><div class="line">       <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</div><div class="line">                                              loadFactor);</div><div class="line"></div><div class="line">       <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">       threshold = initialCapacity;</div><div class="line">       init();<span class="comment">//未做任何实质操作</span></div><div class="line">   }</div></pre></td></tr></table></figure>
+
+<p>2.使用已有的map来构造</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span>(Map&lt;? extends K, ? extends V&gt; m) {</div><div class="line">	<span class="comment">//条用上面的构造函数指定threshold和loadFactor的值</span></div><div class="line">       <span class="keyword">this</span>(Math.max((<span class="keyword">int</span>) (m.size() / DEFAULT_LOAD_FACTOR) + <span class="number">1</span>,</div><div class="line">                     DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);</div><div class="line">	<span class="comment">//填充table</span></div><div class="line">       inflateTable(threshold);</div><div class="line">       putAllForCreate(m);</div><div class="line">   }</div><div class="line"><span class="comment">/*</span></div><div class="line">*	Integer.highestOneBit(number)方法返回将number拆分成几个2的倍数的和，取其中最大一项</div><div class="line">*	Integer.bitCount(number)返回number二进制表示中1的位数</div><div class="line">*	该方法的主要作用就是返回第一个比number大的2的次方型数据</div><div class="line">*/</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">roundUpToPowerOf2</span>(<span class="keyword">int</span> number) {</div><div class="line">       <span class="comment">// assert number &gt;= 0 : "number must be non-negative";</span></div><div class="line">       <span class="keyword">int</span> rounded = number &gt;= MAXIMUM_CAPACITY</div><div class="line">               ? MAXIMUM_CAPACITY</div><div class="line">               : (rounded = Integer.highestOneBit(number)) != <span class="number">0</span></div><div class="line">                   ? (Integer.bitCount(number) &gt; <span class="number">1</span>) ? rounded &lt;&lt; <span class="number">1</span> : rounded</div><div class="line">                   : <span class="number">1</span>;</div><div class="line"></div><div class="line">       <span class="keyword">return</span> rounded;</div><div class="line">   }</div><div class="line"><span class="comment">//正真分配数组大小和指定负载容量</span></div><div class="line">   <span class="keyword">private</span> <span class="keyword">void</span> <span class="title">inflateTable</span>(<span class="keyword">int</span> toSize) {</div><div class="line">       <span class="keyword">int</span> capacity = roundUpToPowerOf2(toSize);</div><div class="line">	<span class="comment">//负载容量指定为map的实际容量*负载因子</span></div><div class="line">       threshold = (<span class="keyword">int</span>) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + <span class="number">1</span>);</div><div class="line">       table = <span class="keyword">new</span> Entry[capacity];</div><div class="line">       initHashSeedAsNeeded(capacity);</div><div class="line">   }</div></pre></td></tr></table></figure>
+
+
+
+
 
       
     </div>
