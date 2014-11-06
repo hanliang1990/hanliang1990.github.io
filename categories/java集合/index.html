@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: collection | 勿忘初心</title>
+  <title>Category: java集合 | 勿忘初心</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="stay foolish stay hungry">
 <meta property="og:type" content="website">
 <meta property="og:title" content="勿忘初心">
-<meta property="og:url" content="http://yoursite.com/categories/collection/">
+<meta property="og:url" content="http://yoursite.com/categories/java集合/">
 <meta property="og:site_name" content="勿忘初心">
 <meta property="og:description" content="stay foolish stay hungry">
 <meta name="twitter:card" content="summary">
@@ -67,14 +67,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-java/collection interface/collection" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-java/java集合/HashMap" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/10/18/java/collection interface/collection/" class="article-date">
+    <a href="/2014/10/18/java/java集合/HashMap/" class="article-date">
   <time datetime="2014-10-18T04:54:22.000Z" itemprop="datePublished">10月 18 2014</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/collection/">collection</a>
+    <a class="article-category-link" href="/categories/java集合/">java集合</a>
   </div>
 
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2014/10/18/java/collection interface/collection/">collection</a>
+      <a class="article-title" href="/2014/10/18/java/java集合/HashMap/">JDK1.7 HashMap实现</a>
     </h1>
   
 
@@ -93,12 +93,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>collection</p>
+        <h1 id="HashMap简介">HashMap简介</h1>
+<hr>
+<h2 id="HashMap">HashMap</h2>
+<p>基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）<br>此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。<br>此实现假定哈希函数将元素适当地分布在各桶之间，可为基本操作（get 和 put）提供稳定的性能。迭代 collection 视图所需的时间与 HashMap 实例的“容量”（桶的数量）<br>及其大小（键-值映射关系数）成比例。所以，如果迭代性能很重要，则不要将初始容量设置得太高（或将加载因子设置得太低）。</p>
+<h2 id="重要参数">重要参数</h2>
+<p>HashMap 的实例有两个参数影响其性能：初始容量 和负载因子。容量是哈希表中桶的数量，初始容量只是哈希表在创建时的容量。负载因子是哈希表在其容量自动增加之前<br>可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两<br>倍的桶数。</p>
+<h2 id="同步机制">同步机制</h2>
+<p>注意，此实现不是同步的。如果多个线程同时访问一个哈希映射，而其中至少一个线程从结构上修改了该映射，则它必须 保持外部同步。（结构上的修改是指添加或删除一<br>个或多个映射关系的任何操作；以防止对映射进行意外的非同步访问，如下所示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map m = Collections.synchronizedMap(new HashMap(<span class="keyword">...</span>));</div></pre></td></tr></table></figure>
+
+<h2 id="迭代器">迭代器</h2>
+<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭代器本身的 remove方法，而不冒在<br>将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来说，存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，<br>正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2014/10/18/java/collection interface/collection/" data-id="lwt2iums0pba33va" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2014/10/18/java/java集合/HashMap/" data-id="s7x68885oh5rxl1f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,7 +128,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/collection/">collection</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活随笔/">生活随笔</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/java集合/">java集合</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/生活随笔/">生活随笔</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程/">编程</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -142,7 +153,7 @@
       <ul>
         
           <li>
-            <a href="/2014/10/18/java/collection interface/collection/">collection</a>
+            <a href="/2014/10/18/java/java集合/HashMap/">JDK1.7 HashMap实现</a>
           </li>
         
           <li>
