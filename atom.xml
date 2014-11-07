@@ -4,7 +4,7 @@
   <subtitle><![CDATA[stay foolish stay hungry]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-11-07T07:58:04.183Z</updated>
+  <updated>2014-11-07T08:03:58.569Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2014/10/18/java/java%E9%9B%86%E5%90%88/HashMap/"/>
     <id>http://yoursite.com/2014/10/18/java/java集合/HashMap/</id>
     <published>2014-10-18T04:54:22.000Z</published>
-    <updated>2014-11-07T07:57:54.000Z</updated>
+    <updated>2014-11-07T08:03:51.000Z</updated>
     <content type="html"><![CDATA[<hr>
 <h2 id="HashMap简介">HashMap简介</h2>
 <p>基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，<br>HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap<br>会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。 此实现假定哈希函数将元素适当地分布在各桶之间，可为<br>基本操作（get 和 put）提供稳定的性能。迭代 collection 视图所需的时间与 HashMap 实例的“容量”（桶的数量）及其大小（键-值映射<br>关系数）成比例。所以，如果迭代性能很重要，则不要将初始容量设置得太高（或将负载因子设置得太低）。</p>
@@ -51,7 +51,7 @@
 <span class="comment">//HashMap修改的次数 容器的fail-fast机制也是基于这个变量</span>
 <span class="keyword">transient</span> <span class="keyword">int</span> modCount;
 </code></pre><h2 id="构造函数">构造函数</h2>
-<p>HashMap提供了四种构造方法，主要的有两个：<br>1.指定初始化容量和负载因子，不填默认为16和0.75,此时table依然会空数组,当调用put时判断如果table尚未<br>分配则调用inflateTable</p>
+<p>HashMap提供了四种构造方法，主要的有两个：<br>1.指定初始化容量和负载因子，不填默认为16和0.75,此时table依然会空数组,当调用put时判断如果table尚未分配则调用inflateTable</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="title">HashMap</span>(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor) {</div><div class="line">       <span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</div><div class="line">                                              initialCapacity);</div><div class="line">       <span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</div><div class="line">           initialCapacity = MAXIMUM_CAPACITY;</div><div class="line">       <span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</div><div class="line">           <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</div><div class="line">                                              loadFactor);</div><div class="line"></div><div class="line">       <span class="keyword">this</span>.loadFactor = loadFactor;</div><div class="line">       threshold = initialCapacity;</div><div class="line">       init();<span class="comment">//未做任何实质操作</span></div><div class="line">   }</div></pre></td></tr></table></figure>
 
 <p>2.使用已有的map来构造</p>
