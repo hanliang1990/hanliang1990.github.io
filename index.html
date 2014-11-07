@@ -103,7 +103,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map m = Collections.synchronizedMap(new HashMap(<span class="keyword">...</span>));</div></pre></td></tr></table></figure>
 
 <h2 id="迭代器">迭代器</h2>
-<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭<br>代器本身的 remove方法，而不冒在将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来说，<br>存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
+<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭<br>代器本身的 remove方法，而不冒在将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来<br>说，存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
 <h2 id="HashMap变量的定义">HashMap变量的定义</h2>
 <pre><code><span class="comment">//默认容量大小16 必须为2的整数次方</span>
 <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span>

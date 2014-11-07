@@ -4,7 +4,7 @@
   <subtitle><![CDATA[stay foolish stay hungry]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-11-07T08:03:58.569Z</updated>
+  <updated>2014-11-07T08:05:24.291Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -19,7 +19,7 @@
     <link href="http://yoursite.com/2014/10/18/java/java%E9%9B%86%E5%90%88/HashMap/"/>
     <id>http://yoursite.com/2014/10/18/java/java集合/HashMap/</id>
     <published>2014-10-18T04:54:22.000Z</published>
-    <updated>2014-11-07T08:03:51.000Z</updated>
+    <updated>2014-11-07T08:05:19.000Z</updated>
     <content type="html"><![CDATA[<hr>
 <h2 id="HashMap简介">HashMap简介</h2>
 <p>基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，<br>HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变当HashMap中数据达到某个阀值，HashMap<br>会进行扩容操作，重新计算key的Hash值从而导致数据的存储顺序发生改变）。 此实现假定哈希函数将元素适当地分布在各桶之间，可为<br>基本操作（get 和 put）提供稳定的性能。迭代 collection 视图所需的时间与 HashMap 实例的“容量”（桶的数量）及其大小（键-值映射<br>关系数）成比例。所以，如果迭代性能很重要，则不要将初始容量设置得太高（或将负载因子设置得太低）。</p>
@@ -30,7 +30,7 @@
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Map m = Collections.synchronizedMap(new HashMap(<span class="keyword">...</span>));</div></pre></td></tr></table></figure>
 
 <h2 id="迭代器">迭代器</h2>
-<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭<br>代器本身的 remove方法，而不冒在将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来说，<br>存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
+<p>由所有此类的“collection 视图方法”所返回的迭代器都是快速失败 的：在迭代器创建之后，如果从结构上对映射进行修改，除非通过迭<br>代器本身的 remove方法，而不冒在将来不确定的时间发生任意不确定行为的风险。注意，迭代器的快速失败行为不能得到保证，一般来<br>说，存在非同步的并发修改时，编写依赖于此异常的程序的做法是错误的，正确做法是：迭代器的快速失败行为应该仅用于检测程序错误。</p>
 <h2 id="HashMap变量的定义">HashMap变量的定义</h2>
 <pre><code><span class="comment">//默认容量大小16 必须为2的整数次方</span>
 <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="number">1</span> &lt;&lt; <span class="number">4</span>; <span class="comment">// aka 16</span>
